@@ -139,3 +139,20 @@
   - Zombie
   - Revolutionary
   - AllHostile
+
+- type: npcFaction
+  id: Clown
+  hostile:
+  - NanoTrasen
+  - Dragon
+  - Mouse
+  - Passive
+  - PetsNT
+  - SimpleHostile
+  - SimpleNeutral
+  - AllHostile
+  - Syndicate
+  - Xeno
+  - Zombie
+  - Revolutionary
+  - Wizard

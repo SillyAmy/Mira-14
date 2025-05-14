@@ -323,3 +323,9 @@ ghost-role-information-lordbingus-description = Enact your will for you are lord
 
 ghost-role-information-wizard-name = Wizard
 ghost-role-information-wizard-desc = YER A WIZARD! Show the station what your magic is made of.
+
+ghost-role-information-clownothing-name = ClownoThing
+ghost-role-information-clownothing-description = You must rule the station. Hide in the maintenance system. Clown on your enemies.
+
+ghost-role-information-clownthings-name = Clown Thing
+ghost-role-information-clownthings-description = Help the clownothing rule the station by honking on the crew!
