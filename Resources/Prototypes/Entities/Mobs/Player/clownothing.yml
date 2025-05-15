@@ -2,7 +2,7 @@
   parent: BaseMobDragon
   id: Clownothing
   name: clownothing
-  description: A... OH MY GOD WHAT THE ABSOLUTE HONKITY FUCK
+  description: A... OH MY GOD WHAT THE ABSOLUTE HONKITY HONK!
   components:
   - type: Bloodstream
     bloodMaxVolume: 650
@@ -19,7 +19,8 @@
     baseSprintSpeed: 5
     weightlessModifier: 1.5
   - type: Sprite
-    sprite: Mobs/Aliens/Clownothing.rsi
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/clownothing.rsi
     noRot: true
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -29,7 +30,7 @@
       Alive:
         Base: clownothing
       Critical:
-        Base: clownothing_dead
+        Base: clownothing_critical
       Dead:
         Base: clownothing_dead
   - type: Physics
@@ -87,9 +88,6 @@
         volume: 3
   - type: Dragon
     spawnRiftAction: ActionSpawnRift
-  - type: GhostRole
-    mindRoles:
-    - MindRoleDragon
   - type: ActionGun
     action: ActionDragonsBreath
     gunProto: DragonsBreathGun
@@ -149,7 +147,7 @@
   id: clownthing
   description: Just run. Why would you even face this thing.
   suffix: ClownBrood
-  parent: MobCombat
+  parent: [BaseMob, MobCombat]
   components:
   - type: Sprite
     drawdepth: Mobs
@@ -201,7 +199,7 @@
   - type: NpcFactionMember
     factions:
     - Clown
-    - type: MobThresholds
-      thresholds:
-        0: Alive
-        40: Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
