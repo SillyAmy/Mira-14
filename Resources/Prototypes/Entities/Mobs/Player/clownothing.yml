@@ -2,6 +2,7 @@
   parent: BaseMobDragon
   id: Clownothing
   name: clownothing
+  affix: ADMEME
   description: A... OH MY GOD WHAT THE ABSOLUTE HONKITY HONK!
   components:
   - type: Bloodstream
