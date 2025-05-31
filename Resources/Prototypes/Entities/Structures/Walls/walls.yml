@@ -1515,3 +1515,26 @@
   - type: IconSmooth
     key: cobblebricks
     base: cobblebrick
+
+- type: entity
+  parent: BaseWall
+  id: SpaceHiveWall
+  name: hive wall
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/spacehive.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: spacehive
+  - type: Destructible
+  - type: Icon
+    sprite: Structures/Walls/spacehive.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: spacehive

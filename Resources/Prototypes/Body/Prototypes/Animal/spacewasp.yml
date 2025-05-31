@@ -1,0 +1,25 @@
+- type: body
+  id: spacewasp
+  name: "spacewasp"
+  root: torso
+  slots:
+    torso:
+      part: TorsoAnimal
+      connections:
+      - left leg
+      - right leg
+      organs:
+        lungs: OrganWaspLungs
+        stomach: OrganWaspStomach
+        liver: OrganWaspLiver
+        heart: OrganWaspHeart
+        kidneys: OrganWaspKidneys
+    left leg:
+      part: LeftLegWasp
+      connections:
+    right leg:
+      part: RightLegWasp
+      connections:
+      - feet
+    feet:
+      part: FeetWasp

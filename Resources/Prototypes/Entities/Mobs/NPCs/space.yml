@@ -571,3 +571,57 @@
         Base: snothdead
       Dead:
         Base: snothdead
+
+- type: entity
+  name: space wasp
+  id: MobWaspSpace
+  parent: [SimpleSpaceMobBase, FlyingMobBase, MobCombat]
+  description: Nanotrasen wants to make these extinct. They are right.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Animals/spacewasp.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spacewasp
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: glow
+      shader: unshaded
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Poison: 4
+        Piercing: 6
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 4.5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: spacewasp
+        BaseUnshaded: glow
+      Critical:
+        Base: spacewasp_dead
+      Dead:
+        Base: spacewasp_dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      50: Dead
+  - type: Stamina
+    critThreshold: 180
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: Bloodstream
+    bloodMaxVolume: 200
+    bloodReagent: Cryoxadone
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+  - type: CombatMode
