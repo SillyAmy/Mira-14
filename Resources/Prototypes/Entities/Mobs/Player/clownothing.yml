@@ -26,6 +26,9 @@
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: clownothing
+    - map: ["enum.enum.DamageStateVisualLayers.Combat"]
+      state: combat
+      visible: false
   - type: DamageStateVisuals
     states:
       Alive:
