@@ -1,9 +1,10 @@
 using Content.Server.Body.Components;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Body.Events;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.EntityEffects;
@@ -39,6 +40,7 @@ namespace Content.Server.Body.Systems
             SubscribeLocalEvent<MetabolizerComponent, ComponentInit>(OnMetabolizerInit);
             SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
             SubscribeLocalEvent<MetabolizerComponent, EntityUnpausedEvent>(OnUnpaused);
+
             SubscribeLocalEvent<MetabolizerComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
         }
 
@@ -98,41 +100,40 @@ namespace Content.Server.Body.Systems
                 if (_gameTiming.CurTime < metab.NextUpdate)
                     continue;
 
-                metab.NextUpdate += metab.UpdateInterval;
-                TryMetabolize((uid, metab));
+                var ev = new GetMetabolizingUpdateDelay(metab.UpdateInterval);
+                RaiseLocalEvent(uid, ev);
+
+                metab.NextUpdate += ev.TotalDelay;
+
+                if (!ev.Cancelled)
+                    TryMetabolize((uid, metab));
             }
         }
 
-        private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?, SolutionContainerManagerComponent?> ent)
+        private void TryMetabolize(Entity<MetabolizerComponent, OrganComponent?> ent)
         {
             _organQuery.Resolve(ent, ref ent.Comp2, logMissing: false);
 
-            // First step is get the solution we actually care about
-            var solutionName = ent.Comp1.SolutionName;
-            Solution? solution = null;
-            Entity<SolutionComponent>? soln = default!;
-            EntityUid? solutionEntityUid = null;
-
-            if (ent.Comp1.SolutionOnBody)
+            if (ent.Comp1.SolutionOnBody && ent.Comp2?.Body is { } body)
             {
-                if (ent.Comp2?.Body is { } body)
-                {
-                    if (!_solutionQuery.Resolve(body, ref ent.Comp3, logMissing: false))
-                        return;
+                var bodySolutionName = ent.Comp1.BodySolutionName ?? ent.Comp1.SolutionName;
 
-                    _solutionContainerSystem.TryGetSolution((body, ent.Comp3), solutionName, out soln, out solution);
-                    solutionEntityUid = body;
+                if (_solutionQuery.TryComp(body, out var bodySolution))
+                {
+                    _solutionContainerSystem.TryGetSolution((body, bodySolution), bodySolutionName, out var soln, out var solution);
+                    Metabolize(ent, solution, soln, body);
                 }
             }
-            else
+
+            if (_solutionQuery.TryComp(ent, out var entSolution))
             {
-                if (!_solutionQuery.Resolve(ent, ref ent.Comp3, logMissing: false))
-                    return;
-
-                _solutionContainerSystem.TryGetSolution((ent, ent), solutionName, out soln, out solution);
-                solutionEntityUid = ent;
+                _solutionContainerSystem.TryGetSolution((ent.Owner, entSolution), ent.Comp1.SolutionName, out var soln, out var solution);
+                Metabolize(ent, solution, soln, ent);
             }
+        }
 
+        private void Metabolize(Entity<MetabolizerComponent, OrganComponent?> ent, Solution? solution, Entity<SolutionComponent>? soln, EntityUid? solutionEntityUid)
+        {
             if (solutionEntityUid is null
                 || soln is null
                 || solution is null
@@ -146,7 +147,7 @@ namespace Content.Server.Body.Systems
             var list = solution.Contents.ToArray();
             _random.Shuffle(list);
 
-            int reagents = 0;
+            var reagents = 0;
             foreach (var (reagent, quantity) in list)
             {
                 if (!_prototypeManager.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
@@ -156,9 +157,7 @@ namespace Content.Server.Body.Systems
                 if (proto.Metabolisms is null)
                 {
                     if (ent.Comp1.RemoveEmpty)
-                    {
                         solution.RemoveReagent(reagent, FixedPoint2.New(1));
-                    }
 
                     continue;
                 }
@@ -182,7 +181,7 @@ namespace Content.Server.Body.Systems
                     // Remove $rate, as long as there's enough reagent there to actually remove that much
                     mostToRemove = FixedPoint2.Clamp(rate, 0, quantity);
 
-                    float scale = (float) mostToRemove / (float) rate;
+                    var scale = (float)mostToRemove / (float)rate;
 
                     // if it's possible for them to be dead, and they are,
                     // then we shouldn't process any effects, but should probably
@@ -232,28 +231,12 @@ namespace Content.Server.Body.Systems
         }
     }
 
-    // TODO REFACTOR THIS
-    // This will cause rates to slowly drift over time due to floating point errors.
-    // Instead, the system that raised this should trigger an update and subscribe to get-modifier events.
-    [ByRefEvent]
-    public readonly record struct ApplyMetabolicMultiplierEvent(
-        EntityUid Uid,
-        float Multiplier,
-        bool Apply)
+    public sealed partial class GetMetabolizingUpdateDelay(TimeSpan delay) : CancellableEntityEventArgs
     {
-        /// <summary>
-        /// The entity whose metabolism is being modified.
-        /// </summary>
-        public readonly EntityUid Uid = Uid;
+        public readonly TimeSpan StartingDelay = delay;
 
-        /// <summary>
-        /// What the metabolism's update rate will be multiplied by.
-        /// </summary>
-        public readonly float Multiplier = Multiplier;
+        public TimeSpan AdditionalDelay;
 
-        /// <summary>
-        /// If true, apply the multiplier. If false, revert it.
-        /// </summary>
-        public readonly bool Apply = Apply;
+        public TimeSpan TotalDelay => StartingDelay + AdditionalDelay;
     }
 }

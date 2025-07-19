@@ -27,7 +27,7 @@
 
 - type: entity
   id: OrganDionaBrain
-  parent: [BaseDionaOrgan, OrganHumanBrain]
+  parent: [ BaseDionaOrgan, OrganHumanBrain ]
   name: brain
   description: "The central hub of a diona's pseudo-neurological activity, its root-like tendrils search for its former body."
   components:
@@ -36,6 +36,8 @@
     heldPrefix: brain
   - type: Sprite
     state: brain
+  - type: Organ
+    organType: Brain
   - type: SolutionContainerManager
     solutions:
       organ:
@@ -58,6 +60,8 @@
   name: eyes
   description: "I see you!"
   components:
+  - type: Organ
+    organType: Eyes
   - type: Sprite
     layers:
       - state: eyeball-l
@@ -65,12 +69,10 @@
 
 - type: entity
   id: OrganDionaStomach
-  parent: BaseDionaOrgan
+  parent: [ BaseOrganStomach, BaseDionaOrgan ]
   name: stomach
   description: "The diona's equivalent of a stomach, it reeks of asparagus and vinegar."
   components:
-  - type: Sprite
-    state: stomach
   - type: SolutionContainerManager
     solutions:
       stomach:
@@ -80,39 +82,28 @@
         reagents:
         - ReagentId: UncookedAnimalProteins
           Quantity: 5
-  - type: Stomach
   - type: Metabolizer
     maxReagents: 6
-    metabolizerTypes: [ Plant ]
+    metabolizerTypes:
+    - Plant
     removeEmpty: true
     groups:
       - id: Food
       - id: Drink
-      - id: Medicine
-      - id: Poison
-      - id: Narcotic
-      - id: Alcohol
-        rateModifier: 0.1
-  - type: Item
-    size: Small
-    heldPrefix: stomach
 
 - type: entity
   id: OrganDionaLungs
-  parent: BaseDionaOrgan
+  parent: [ BaseOrganLungs, BaseDionaOrgan ]
   name: lungs
   description: "A spongy mess of slimy, leaf-like structures. Capable of breathing both carbon dioxide and oxygen."
   components:
   - type: Sprite
-    state: lungs
-  - type: Item
-    size: Small
-    heldPrefix: lungs
-  - type: Lung 
+    layers:
+    - state: lungs
   - type: Metabolizer
     removeEmpty: true
-    solutionOnBody: false
     solution: "Lung"
+    bodySolution: chemicals
     metabolizerTypes: [ Plant ]
     groups:
     - id: Gas
@@ -128,6 +119,36 @@
         maxVol: 100
         canReact: False
 
+- type: entity
+  id: OrganDionaLiver
+  parent: [ BaseOrganLiver, BaseDionaOrgan ]
+  name: liver
+  description: "What loosely resembles a liver, minus the branches."
+  components:
+  - type: Metabolizer
+    maxReagents: 1
+    metabolizerTypes: [ Plant ]
+    groups:
+    - id: Alcohol
+      rateModifier: 0.05
+
+- type: entity
+  id: OrganDionaKidneys
+  parent: [ BaseOrganKidneys, BaseDionaOrgan ]
+  name: kidneys
+  description: "Green potatoes."
+  components:
+  - type: Metabolizer
+    updateInterval: 0.9
+    maxReagents: 2
+    removeEmpty: true
+    metabolizerTypes:
+      - Plant
+    groups:
+    - id: Medicine
+    - id: Poison
+    - id: Narcotic
+
 # Organs that turn into nymphs on removal
 - type: entity
   id: OrganDionaBrainNymph
@@ -137,7 +158,7 @@
   description: "The source of incredible, unending intelligence. Honk."
   components:
   - type: Brain
-  - type: Nymph # This will make the organs turn into a nymph when they're removed. 
+  - type: Nymph # This will make the organs turn into a nymph when they're removed.
     entityPrototype: OrganDionaNymphBrain
     transferMind: true
 
@@ -161,6 +182,26 @@
   - type: Nymph
     entityPrototype: OrganDionaNymphLungs
 
+- type: entity
+  id: OrganDionaLiverNymph
+  parent: OrganDionaLiver
+  categories: [ HideSpawnMenu ]
+  name: kidneys
+  description: "Pairing suggestion: chianti and fava beans."
+  components:
+  - type: Nymph
+    entityPrototype: OrganDionaNymphLiver
+
+- type: entity
+  id: OrganDionaKidneysNymph
+  parent: OrganDionaKidneys
+  categories: [ HideSpawnMenu ]
+  name: kidneys
+  description: "Filters toxins from the bloodstream."
+  components:
+  - type: Nymph
+    entityPrototype: OrganDionaNymphKidneys
+
 # Nymphs that the organs will turn into
 - type: entity
   id: OrganDionaNymphBrain
@@ -176,11 +217,11 @@
 
 - type: entity
   id: OrganDionaNymphStomach
-  parent: MobDionaNymphAccent 
+  parent: MobDionaNymphAccent
   categories: [ HideSpawnMenu ]
   name: diona nymph
   suffix: Stomach
-  description: Contains the stomach of a formerly fully-formed Diona. It doesn't taste any better for it. 
+  description: Contains the stomach of a formerly fully-formed Diona. It doesn't taste any better for it.
   components:
   - type: IsDeadIC
   - type: Body
@@ -192,8 +233,44 @@
   categories: [ HideSpawnMenu ]
   name: diona nymph
   suffix: Lungs
-  description: Contains the lungs of a formerly fully-formed Diona. Breathtaking. 
+  description: Contains the lungs of a formerly fully-formed Diona. Breathtaking.
   components:
   - type: IsDeadIC
   - type: Body
     prototype: AnimalNymphLungs
+
+- type: entity
+  id: OrganDionaNymphLiver
+  parent: MobDionaNymphAccent
+  categories: [ HideSpawnMenu ]
+  name: diona nymph
+  suffix: Liver
+  description: Contains the liver of a formerly fully-formed Diona. A walking pub.
+  components:
+  - type: IsDeadIC
+  - type: Body
+    prototype: AnimalNymphLiver
+
+- type: entity
+  id: OrganDionaNymphKidneys
+  parent: MobDionaNymphAccent
+  categories: [ HideSpawnMenu ]
+  name: diona nymph
+  suffix: Kidneys
+  description: Contains the kidneys of a formerly fully-formed Diona. Perfect for a pie.
+  components:
+  - type: IsDeadIC
+  - type: Body
+    prototype: AnimalNymphKidneys
+
+- type: entity
+  id: OrganDionaTongue
+  parent: OrganHumanTongue
+  components:
+  - type: VocalOrgan
+    sounds:
+      Male: UnisexDiona
+      Female: UnisexDiona
+      Unsexed: UnisexDiona
+  - type: TypingIndicator
+    proto: diona

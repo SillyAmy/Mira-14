@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Atmos.Rotting;
@@ -46,7 +47,10 @@ public sealed partial class RottingComponent : Component
         DamageDict = new()
         {
             { "Blunt", 0.06 },
-            { "Cellular", 0.06 }
+            { "Necrosis", 0.06 }
         }
     };
 }
+
+[Serializable, NetSerializable]
+public sealed partial class StartedRottingEvent : EntityEventArgs;

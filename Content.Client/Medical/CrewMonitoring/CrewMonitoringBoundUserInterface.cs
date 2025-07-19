@@ -14,6 +14,8 @@ public sealed class CrewMonitoringBoundUserInterface : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
+
         EntityUid? gridUid = null;
         var stationName = string.Empty;
 
@@ -29,6 +31,7 @@ public sealed class CrewMonitoringBoundUserInterface : BoundUserInterface
 
         _menu = this.CreateWindow<CrewMonitoringWindow>();
         _menu.Set(stationName, gridUid);
+        _menu.NavMap.NavMapWarpAttemptAction += SendPredictedMessage;
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

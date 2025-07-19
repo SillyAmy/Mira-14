@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Containers;
+using Content.Shared.MedicalScanner;
+using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -16,7 +17,7 @@ public sealed partial class CryoPodComponent : Component
     public string PortName { get; set; } = "port";
 
     /// <summary>
-    /// Specifies the name of the atmospherics port to draw gas from.
+    /// Specifies the name of the slot that holds beaker with medicine.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("solutionContainerName")]
@@ -73,6 +74,9 @@ public sealed partial class CryoPodComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("permaLocked")]
     public bool PermaLocked { get; set; }
+
+    [DataField]
+    public HealthAnalyzerType AnalyzerType = HealthAnalyzerType.BodyAndOrgans;
 
     [Serializable, NetSerializable]
     public enum CryoPodVisuals : byte

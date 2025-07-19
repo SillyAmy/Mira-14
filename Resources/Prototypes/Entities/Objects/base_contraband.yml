@@ -1,12 +1,30 @@
-﻿# non-stealth syndicate stuff
+﻿# used by the unique items of xenoborgs (like modules and stuff)
+- type: entity
+  id: BaseXenoborgContraband
+  abstract: true
+  components:
+  - type: Contraband
+    severity: Major # placeholder until they make a better severity
+
+# any type of magical items used by wizards and similiar
+- type: entity
+  id: BaseMagicalContraband
+  abstract: true
+  components:
+  - type: Contraband
+    severity: Magical
+    allowedDepartments: [  ]
+    criminalPoints: 4
+
+# non-stealth syndicate stuff
 - type: entity
   id: BaseSyndicateContraband
   abstract: true
   components:
   - type: Contraband
     severity: Syndicate
-    # no one should be carrying this around visibly!
-    allowedDepartments: null
+    allowedDepartments: [  ]
+    criminalPoints: 4
 
 # minor contraband not departmentally restricted -- improvised weapons etc
 - type: entity
@@ -16,7 +34,8 @@
   - type: Contraband
     severity: Minor
     # according to space law no dept is authorized to have
-    allowedDepartments: null
+    allowedDepartments: [  ]
+    criminalPoints: 2.5
 
 # major contraband, for things like guns or weaponry that don't belong to any department and aren't syndicate specific
 - type: entity
@@ -25,15 +44,19 @@
   components:
   - type: Contraband
     severity: Major
-    allowedDepartments: null
+    allowedDepartments: [  ]
+    criminalPoints: 3
 
-# minor contraband by default restricted to security only
+# base department restricted contraband, this should only be used as a parent for other contraband prototypes, not the restricted items themselves.
 - type: entity
   id: BaseRestrictedContraband
   abstract: true
   components:
   - type: Contraband
     severity: Restricted
+    criminalPoints: 3
+    allowedDepartments: [  ]
+    allowedJobs: [  ]
 
 # one department restricted contraband
 - type: entity
@@ -43,6 +66,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ CentralCommand ]
+    criminalPoints: 3.5
 
 - type: entity
   id: BaseCommandContraband
@@ -51,6 +75,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Command ]
+    criminalPoints: 3
 
 - type: entity
   id: BaseSecurityContraband
@@ -59,6 +84,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Security ]
+    criminalPoints: 3
 
 - type: entity
   id: BaseEngineeringContraband
@@ -67,6 +93,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Engineering ]
+    criminalPoints: 2
 
 - type: entity
   id: BaseScienceContraband
@@ -75,6 +102,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Science ]
+    criminalPoints: 2
 
 - type: entity
   id: BaseMedicalContraband
@@ -83,6 +111,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Medical ]
+    criminalPoints: 2
 
 - type: entity
   id: BaseCivilianContraband
@@ -99,6 +128,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Cargo ]
+    criminalPoints: 2
 
 # multiple departments restricted contraband
 - type: entity
@@ -108,6 +138,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ CentralCommand, Command ]
+    criminalPoints: 3
 
 - type: entity
   id: BaseSecurityCommandContraband
@@ -116,6 +147,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Security, Command ]
+    criminalPoints: 3.5
 
 - type: entity
   id: BaseSecurityScienceCommandContraband
@@ -124,6 +156,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Security, Science, Command ]
+    criminalPoints: 3.25
 
 - type: entity
   id: BaseSecurityEngineeringContraband
@@ -132,6 +165,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Security, Engineering ]
+    criminalPoints: 3
 
 - type: entity
   id: BaseSiliconScienceContraband
@@ -140,6 +174,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Science, Silicon ]
+    criminalPoints: 2
 
 - type: entity
   id: BaseSecurityCargoContraband
@@ -148,6 +183,7 @@
   components:
   - type: Contraband
     allowedDepartments: [ Security, Cargo ]
+    criminalPoints: 3.25
 
 - type: entity
   id: BaseMedicalScienceContraband
@@ -156,6 +192,46 @@
   components:
   - type: Contraband
     allowedDepartments: [ Medical, Science ]
+    criminalPoints: 2
+
+# contraband restricted by job by some degree
+- type: entity
+  id: BaseSecurityBartenderContraband
+  parent: BaseRestrictedContraband
+  abstract: true
+  components:
+  - type: Contraband
+    allowedDepartments: [ Security ]
+    allowedJobs: [ Bartender ]
+    criminalPoints: 3
+
+- type: entity
+  id: BaseSecurityBartenderZookeeperContraband
+  parent: BaseRestrictedContraband
+  abstract: true
+  components:
+  - type: Contraband
+    allowedDepartments: [ Security ]
+    allowedJobs: [ Bartender, Zookeeper ]
+
+- type: entity
+  id: BaseSecurityLawyerContraband
+  parent: BaseRestrictedContraband
+  abstract: true
+  components:
+  - type: Contraband
+    allowedDepartments: [ Security ]
+    allowedJobs: [ Lawyer ]
+    criminalPoints: 2
+
+- type: entity
+  id: BaseJanitorContraband
+  parent: BaseRestrictedContraband
+  abstract: true
+  components:
+  - type: Contraband
+    allowedJobs: [ Janitor ]
+    criminalPoints: 1
 
 # for ~objective items
 - type: entity
@@ -165,3 +241,4 @@
   - type: Contraband
     severity: GrandTheft
     allowedDepartments: [ Command ]
+    criminalPoints: 5

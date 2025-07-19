@@ -92,6 +92,58 @@
   - type: StaticPrice
     price: 100
   - type: BlockWeather
+  - type: StationAiVisionVisuals
+    shapes:
+    - !type:StationAiVisionVisualsRect
+      rect: 0, 0, 1, 0.125
+      color: "#000000"
+    - !type:StationAiVisionVisualsRect
+      rect: 0, 1, 1, 0.875
+      color: "#000000"
+    - !type:StationAiVisionVisualsRect
+      rect: 0, 0, 0.125, 1
+      color: "#000000"
+    - !type:StationAiVisionVisualsRect
+      rect: 0.875, 0, 1, 1
+      color: "#000000"
+
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0
+      end: 1, 0
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0
+      end: 0, 1
+      color: "#00f000"
+    - !type:StationAiVisionVisualsVertex
+      start: 1, 1
+      end: 1, 0
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 1, 1
+      end: 0, 1
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 1, 1
+      end: 0, 1
+      color: "#00ff00"
+
+    - !type:StationAiVisionVisualsVertex
+      start: 0.125, 0.125
+      end: 0.875, 0.125
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 0.125, 0.875
+      end: 0.875, 0.875
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 0.125, 0.125
+      end: 0.125, 0.875
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 0.875, 0.125
+      end: 0.875, 0.875
+      color: "#00ff00"
 
 - type: entity
   parent: Window
@@ -157,7 +209,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,-0.36"
+          bounds: "-0.5,-0.5,0.5,-0.28125"
         density: 1500
         mask:
         - FullTileMask
@@ -213,6 +265,27 @@
       sprite: Structures/Windows/cracks_directional.rsi
   - type: StaticPrice
     price: 15
+  - type: StationAiVisionVisuals
+    shapes:
+    - !type:StationAiVisionVisualsRect
+      rect: 0, 0.21875, 1, 0.21875
+      color: "#000000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0.21875
+      end: 1, 0.21875
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0
+      end: 1, 0
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0.21875
+      end: 0, 0
+      color: "#00ff00"
+    - !type:StationAiVisionVisualsVertex
+      start: 1, 0.21875
+      end: 1, 0
+      color: "#00ff00"
 
 - type: entity
   id: WindowDirectionalRCDResistant
@@ -254,6 +327,9 @@
     drawdepth: WallTops
     sprite: Structures/Windows/window_diagonal.rsi
     state: state0
+  - type: Tag
+    tags:
+    - Diagonal
   - type: IconSmooth
     mode: Diagonal
     key: windows

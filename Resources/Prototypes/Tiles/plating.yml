@@ -1,14 +1,40 @@
 - type: tile
   id: Plating
+  parent: BaseAiVisionSquare
   name: tiles-plating
   sprite: /Textures/Tiles/plating.png
   baseTurf: Lattice
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.3
+  friction: 1.5
   heatCapacity: 10000
   deconstructTools: [ Plating ]
+  stationAiVisuals:
+    shapes:
+    - !type:StationAiVisionVisualsRect
+      rect: 0, 0, 1, 1
+      color: "#000000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0
+      end: 1, 0
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0
+      end: 0, 1
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 1, 1
+      end: 1, 0
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 1, 1
+      end: 0, 1
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 1, 1
+      end: 0, 1
+      color: "#006000"
 
 - type: tile
   id: PlatingDamaged
@@ -23,7 +49,7 @@
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.3
+  friction: 1.5
   heatCapacity: 10000
   deconstructTools: [ Plating ]
 
@@ -35,7 +61,7 @@
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.3
+  friction: 1.5
   heatCapacity: 10000
   deconstructTools: [ Plating ]
 
@@ -47,7 +73,7 @@
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.3
+  friction: 1.5
   heatCapacity: 10000
   deconstructTools: [ Plating ]
 
@@ -59,24 +85,60 @@
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.15 #a little less then actual snow
+  friction: 0.75 #a little less then actual snow
   heatCapacity: 10000
   deconstructTools: [ Plating ]
 
 - type: tile
   id: Lattice
   name: tiles-lattice
-  sprite: /Textures/Tiles/lattice.png
+  sprite: /Textures/Tiles/Misc/Lattice/lattice.png
   baseTurf: Space
   isSubfloor: true
   deconstructTools: [ Cutting ]
   weather: true
   footstepSounds:
-    collection: FootstepPlating
-  friction: 0.3
+    collection: FootstepCatwalk
+  edgeSprites:
+    South: /Textures/Tiles/Misc/Lattice/double_edge_south.png
+    East: /Textures/Tiles/Misc/Lattice/double_edge_east.png
+    North: /Textures/Tiles/Misc/Lattice/double_edge_north.png
+    West: /Textures/Tiles/Misc/Lattice/double_edge_west.png
+  friction: 1.5
   isSpace: true
   itemDrop: PartRodMetal1
   heatCapacity: 10000
+  mass: 200
+  stationAiVisuals:
+    shapes:
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0.25
+      end: 1, 0.25
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0.75
+      end: 1, 0.75
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0.25, 0
+      end: 0.25, 1
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0.75, 0
+      end: 0.75, 1
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0.75, 0.25
+      end: 0.25, 0.75
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0.5, 0
+      end: 1, 0.5
+      color: "#006000"
+    - !type:StationAiVisionVisualsVertex
+      start: 0, 0.5
+      end: 0.5, 1
+      color: "#006000"
 
 - type: tile
   id: TrainLattice
@@ -88,7 +150,8 @@
   weather: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.3
+  friction: 1.5
   isSpace: true
   itemDrop: PartRodMetal1
   heatCapacity: 10000
+  mass: 200

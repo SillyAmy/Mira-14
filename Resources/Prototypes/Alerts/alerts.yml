@@ -26,8 +26,9 @@
     - category: Thirst
     - alertType: Magboots
     - alertType: Crawling
+    - alertType: Rooted
     - alertType: Pacified
-    - alertType: Deflecting
+    - alertType: Stealthy
 
 - type: entity
   id: AlertSpriteView
@@ -137,6 +138,7 @@
     state: walking
   name: alerts-walking-name
   description: alerts-walking-desc
+  clientHandled: true
 
 - type: alert
   id: Stun
@@ -449,6 +451,19 @@
   description: alerts-pacified-desc
 
 - type: alert
+  id: Stealthy
+  clickEvent: !type:ToggleThievingEvent
+  icons:
+  - sprite: /Textures/Interface/Alerts/stealthy.rsi
+    state: stealthy-off
+  - sprite: /Textures/Interface/Alerts/stealthy.rsi
+    state: stealthy-on
+  name: alerts-stealthy-name
+  description: alerts-stealthy-desc
+  minSeverity: 0
+  maxSeverity: 1
+
+- type: alert
   id: Adrenaline
   icons:
   - sprite: Mobs/Species/Human/organs.rsi
@@ -503,11 +518,3 @@
     state: critical
   name: Debug6
   description: Debug
-
-- type: alert
-  id: Deflecting
-  icons:
-  - sprite: /Textures/Interface/Alerts/deflecting.rsi
-    state: deflecting0
-  name: alerts-deflecting-name
-  description: alerts-deflecting-desc

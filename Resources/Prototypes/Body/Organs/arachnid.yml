@@ -38,7 +38,7 @@
     size: Small
     heldPrefix: stomach
   - type: Stomach
-    updateInterval: 1.5
+    digestionDelay: 30
   - type: SolutionContainerManager
     solutions:
       stomach:
@@ -53,71 +53,35 @@
 
 - type: entity
   id: OrganArachnidLungs
-  parent: BaseArachnidOrgan
+  parent: [ BaseOrganLungs, BaseArachnidOrgan ]
   name: lungs
   description: "Filters oxygen from an atmosphere... just more greedily."
   components:
-  - type: Sprite
-    layers:
-      - state: lung-l
-      - state: lung-r
-  - type: Lung
   - type: Metabolizer
     updateInterval: 1.5
     removeEmpty: true
-    solutionOnBody: false
     solution: "Lung"
+    bodySolution: chemicals
     metabolizerTypes: [ Human ]
     groups:
     - id: Gas
       rateModifier: 100.0
-  - type: SolutionContainerManager
-    solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      Lung:
-        maxVol: 100.0
-        canReact: false
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
 
 - type: entity
   id: OrganArachnidHeart
-  parent: BaseArachnidOrgan
+  parent: [ BaseOrganHeart, BaseArachnidOrgan ]
   name: heart
   description: "A disgustingly persistent little biological pump made for spiders."
-  components:
-  - type: Sprite
-    state: heart-on
-  - type: Item
-    size: Small
-    heldPrefix: heart
-  - type: Metabolizer
-    updateInterval: 1.5
-    maxReagents: 2
-    metabolizerTypes: [Arachnid]
-    groups:
-    - id: Medicine
-    - id: Poison
-    - id: Narcotic
 
 - type: entity
   id: OrganArachnidLiver
-  parent: BaseHumanOrgan
+  parent: [ BaseOrganLiver, BaseArachnidOrgan ]
   name: liver
   description: "Pairing suggestion: chianti and fava beans."
   categories: [ HideSpawnMenu ]
   components:
-  - type: Item
-    size: Small
-    heldPrefix: liver
   - type: Sprite
-    state: liver
+    sprite: Mobs/Species/Human/organs.rsi
   - type: Metabolizer # The liver metabolizes certain chemicals only, like alcohol.
     updateInterval: 1.5
     maxReagents: 1
@@ -128,24 +92,28 @@
 
 - type: entity
   id: OrganArachnidKidneys
-  parent: BaseHumanOrgan
+  parent: [ BaseOrganKidneys, BaseArachnidOrgan ]
   name: kidneys
   description: "Filters toxins from the bloodstream."
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    layers:
-      - state: kidney-l
-      - state: kidney-r
+    sprite: Mobs/Species/Human/organs.rsi
   # The kidneys just remove anything that doesn't currently have any metabolisms, as a stopgap.
   - type: Item
     size: Small
     heldPrefix: kidneys
+  - type: Organ
+    organType: Kidneys
   - type: Metabolizer
     updateInterval: 1.5
-    maxReagents: 5
-    metabolizerTypes: [Animal]
+    maxReagents: 2
     removeEmpty: true
+    metabolizerTypes: [Arachnid]
+    groups:
+    - id: Medicine
+    - id: Poison
+    - id: Narcotic
 
 - type: entity
   id: OrganArachnidEyes
@@ -160,6 +128,8 @@
   - type: Item
     size: Small
     heldPrefix: eyeballs
+  - type: Organ
+    organType: Eyes
 
 - type: entity
   id: OrganArachnidTongue
@@ -169,3 +139,12 @@
   components:
   - type: Sprite
     state: tongue
+  - type: Organ
+    organType: Tongue
+  - type: TypingIndicatorOrgan
+    proto: spider
+  - type: VocalOrgan
+    sounds:
+      Male: UnisexArachnid
+      Female: UnisexArachnid
+      Unsexed: UnisexArachnid

@@ -8,7 +8,7 @@ namespace Content.Shared.CriminalRecords;
 /// Can be viewed and edited in a criminal records console by security.
 /// </summary>
 [Serializable, NetSerializable, DataRecord]
-public sealed record CriminalRecord
+public sealed partial record CriminalRecord
 {
     /// <summary>
     /// Status of the person (None, Wanted, Detained).
@@ -42,3 +42,16 @@ public sealed record CriminalRecord
 /// </summary>
 [Serializable, NetSerializable]
 public record struct CrimeHistory(TimeSpan AddTime, string Crime, string? InitiatorName);
+
+[Serializable, NetSerializable]
+public sealed class CriminalRecordChanged : EntityEventArgs
+{
+    public SecurityStatus Status;
+    public SecurityStatus PreviousStatus;
+
+    public CriminalRecordChanged(SecurityStatus status, SecurityStatus previousStatus)
+    {
+        Status = status;
+        PreviousStatus = previousStatus;
+    }
+}

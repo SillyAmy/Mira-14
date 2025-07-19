@@ -6,8 +6,8 @@
     - type: Sprite
       layers:
         - state: red
-        - sprite: Objects/Fun/toys.rsi
-          state: plushie_h
+        - sprite: Objects/Fun/Plushies/bee.rsi
+          state: icon
     - type: RandomSpawner
       rarePrototypes:
         - FoamBlade
@@ -86,6 +86,20 @@
       rarePrototypes:
       - ToyFigurineNukieElite
       - ToyFigurineNukieCommander
+      - ToyRareFigurinePassenger
+      - ToyRareFigurineClown
+      - ToyRareFigurineMime
+      - ToyRareFigurineHamlet
+      - ToyRareFigurineSalvage
+      - ToyRareFigurineSlime
+      - ToyRareFigurineJanitor
+      - ToyRareFigurineChiefEngineer
+      - ToyRareFigurineEngineer
+      - ToyRareFigurineChiefMedicalOfficer
+      - ToyRareFigurineWarden
+      - ToyRareFigurineHeadOfSecurity
+      - ToyRareFigurineCaptain
+      - ToyRareFigurineSecurity
       rareChance: 0.05
       prototypes:
       - ToyFigurinePassenger
@@ -101,7 +115,7 @@
       - ToyFigurineLawyer
       - ToyFigurineCargoTech
       - ToyFigurineSalvage
-      - ToyFigurineQuartermaster   
+      - ToyFigurineQuartermaster
       - ToyFigurineChiefEngineer
       - ToyFigurineAtmosTech
       - ToyFigurineEngineer

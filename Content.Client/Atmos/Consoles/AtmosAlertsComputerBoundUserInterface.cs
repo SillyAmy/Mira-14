@@ -11,9 +11,12 @@ public sealed class AtmosAlertsComputerBoundUserInterface : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
+
         _menu = new AtmosAlertsComputerWindow(this, Owner);
         _menu.OpenCentered();
         _menu.OnClose += Close;
+        _menu.NavMap.NavMapWarpAttemptAction += SendPredictedMessage;
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

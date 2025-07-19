@@ -96,6 +96,18 @@ barsign-prototype-description-emprah = Enjoyed by fanatics, heretics, and brain-
 barsign-prototype-name-spacebucks = Spacebucks
 barsign-prototype-description-spacebucks = You can't get away from them, even in space, and even after we started calling them 'spesos' instead.
 
+## Central Stop
+barsign-prototype-name-centralstop = Central Stop
+barsign-prototype-description-centralstop = High class luxury.
+
+## Maltroach
+barsign-prototype-name-maltroach = Maltroach
+barsign-prototype-description-maltroach = Squeak!
+
+## Whiskey Echoes
+barsign-prototype-name-whiskeyechoes = Whiskey Echoes
+barsign-prototype-description-whiskeyechoes = An elite bar for elite oper-wait, this is a Nanotrasen station. Why's this sign in the database?
+
 ## EmpBarSign
 barsign-prototype-description-empbarsign = Something has gone very wrong.
 

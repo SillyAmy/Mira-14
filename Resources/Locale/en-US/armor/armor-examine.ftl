@@ -14,13 +14,20 @@ armor-damage-type-caustic = Caustic
 armor-damage-type-bloodloss = Bloodloss
 armor-damage-type-asphyxiation = Asphyxiation
 armor-damage-type-cellular = Cellular
+armor-damage-type-necrosis = Necrosis
 armor-damage-type-cold = Cold
 armor-damage-type-poison = Poison
 armor-damage-type-shock = Shock
 armor-damage-type-structural = Structural
 armor-damage-type-holy = Holy
 
-armor-part-head = Head
-armor-part-torso = Torso
-armor-part-arm = Arms
-armor-part-leg = Legs
+armor-part-wrap = {$message}:
+
+armor-part-name =
+    { $part ->
+        [head] Head
+        [torso] Torso
+        [arm] Arms
+        [leg] Legs
+        *[other] Unknown
+    }

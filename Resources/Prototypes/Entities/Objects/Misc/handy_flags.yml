@@ -41,10 +41,10 @@
   description: "The be gay do crime handy flag."
   components:
   - type: Sprite
-    sprite: Objects/Misc/Handy_Flags/lgbtq_handy_flag.rsi
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/lgbtq_handy_flag.rsi
     state: icon
   - type: Item
-    sprite: Objects/Misc/Handy_Flags/lgbtq_handy_flag.rsi
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/lgbtq_handy_flag.rsi
 
 - type: entity
   parent: BaseItem
@@ -57,3 +57,159 @@
     state: icon
   - type: Item
     sprite: Objects/Misc/Handy_Flags/pirate_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: LesbianHandyFlag
+  name: lesbian handheld flag
+  description: "Come on, show these people how much you love WOMEN!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/lesbian_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/lesbian_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: TransexualHandyFlag
+  name: trans handheld flag
+  description: "Holding this, you feel some kind of power... And need for pickles?"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/transexual_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/transexual_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: AromanticismHandyFlag
+  name: aromantic handheld flag
+  description: "Show these people how neutral you feel!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/aromanticism_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/aromanticism_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: AsexualityHandyFlag
+  name: asexual handheld flag
+  description: "Show these people how neutral you feel!²"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/asexuality_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/asexuality_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: BisexualHandyFlag
+  name: bisexual handheld flag
+  description: "It's time for trouble, and make it double!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/bisexual_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/bisexual_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: NonbinaryHandyFlag
+  name: non-binary handheld flag
+  description: "Boy, girl, what's the difference? Let's be neither!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/nonbinary_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/nonbinary_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: PansexualityHandyFlag
+  name: pansexual handheld flag
+  description: "Don't let whoever is holding this cook..."
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/pansexual_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/pansexual_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: IntersexHandyFlag
+  name: intersex handheld flag
+  description: "Circle?"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/intersex_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/intersex_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: GayHandyFlag
+  name: gay handheld flag
+  description: "Come on... Kiss your homies goodnight."
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/gay_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/gay_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: AllyHandyFlag
+  name: ally handheld flag
+  description: "Woo-hoo! Allyship!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/ally_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/ally_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: AroAceHandyFlag
+  name: aroace handheld flag
+  description: "Show how platonic you are!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/aroace_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/aroace_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: OmnisexualHandyFlag
+  name: omnisexual handheld flag
+  description: "Gotta love em all'!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/omnisexual_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/omnisexual_handy_flag.rsi
+
+- type: entity
+  parent: BaseItem
+  id: GenderqueerHandyFlag
+  name: genderqueer handheld flag
+  description: "Show everyone who you are!"
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/genderqueer_handy_flag.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Misc/Handy_Flags/LGBTQ_Flags/genderqueer_handy_flag.rsi
